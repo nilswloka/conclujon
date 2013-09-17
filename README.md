@@ -1,6 +1,6 @@
 # conclujon
 
-Conclujon is meant to help you with writing [living documentation](http://specificationbyexample.com/key_ideas.html). It is inspired by [Concordion](http://concordion.org/) but tries to fit the functional Clojure world better by doing some things differently. It is also in a very early stage (you might call it a proof of concept), so expect things to change often.
+Conclujon is meant to help you with writing [living documentation](http://specificationbyexample.com/key_ideas.html). It is inspired by [Concordion](http://concordion.org/) but tries to fit the functional Clojure world better by doing some things differently. It is also in a very early stage (you might call it a proof of concept), so expect things to change and break often.
 
 ## Why HTML?
 
@@ -11,6 +11,8 @@ If you are familiar with [Specification by Example](http://specificationbyexampl
 [Concordion](http://concordion.org/) is well integrated into the Java test ecosystem. That's a good thing. It does make implementing fixtures in Clojure awkward at best, thought. Conclujon on the other hand is conceived with Clojure in mind and tries not to make any further assumption about your application. Being able to rely on [Enlive](https://github.com/cgrand/enlive) for the heavy lifting makes reinventing the wheel a lot less tedious, too.
 
 ## Usage
+
+To get started, add `[conclujon "0.1.0"]` to your project's dependencies (preferably inside the `:dev` profile).
 
 Conclujon test cases consist of two parts which are joined together by the library by conventions. You express your test case in HTML:
 

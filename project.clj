@@ -1,4 +1,4 @@
-(defproject conclujon "0.1.0-SNAPSHOT"
+(defproject conclujon "0.1.0"
   :description "A framework for writing and executing active specifications in HTML."
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
