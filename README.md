@@ -12,7 +12,7 @@ If you are familiar with [Specification by Example](http://specificationbyexampl
 
 ## Usage
 
-To get started, add `[conclujon "0.1.0"]` to your project's dependencies (preferably inside the `:dev` profile).
+To get started, add `[conclujon "0.1.1"]` to your project's dependencies (preferably inside the `:dev` profile).
 
 Conclujon test cases consist of two parts which are joined together by the library by conventions. You express your test case in HTML:
 
