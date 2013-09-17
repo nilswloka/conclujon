@@ -100,6 +100,6 @@ Apparently, the current feature set of Conclujon is minimal. The next things on 
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Nils Wloka
 
 Distributed under the Eclipse Public License, the same as Clojure.
