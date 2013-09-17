@@ -1,8 +1,16 @@
 <html>
+  <head>
+    <style type="text/css">
+      .failed { text-decoration: line-through; color: black; background-color: red; }
+      .passed { color: black; background-color: green; }
+      .actual { color: black; background-color: red; padding-left: 5px; }
+    </style>
+  </head>
   <body>
     <p>
       Given a person named <em data-conclujon:assoc-input=":name">Stranger</em>,<br/>
-      the greeting is <em data-conclujon:assert-equals="greeting">Hello Stranger!</em>.
+      the greeting is <em data-conclujon:assert-equals="greeting">Hello Stranger!</em>.<br/>
+      And the greeting is still <em data-conclujon:assert-equals="greeting">Hello Stranger!</em>.
     </p>
     <p>
       Given a person named <em data-conclujon:assoc-input=":name">Nils</em>,<br/>

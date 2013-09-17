@@ -1,5 +1,5 @@
 (ns conclujon.core
-  (:require [net.cgrand.enlive-html :refer [select attr? pred add-class at emit* html-resource]])
+  (:require [net.cgrand.enlive-html :refer [do-> select attr? pred add-class after at emit* html-resource html-snippet]])
   (:require [clojure.java.io :refer [file make-parents]])
   (:require [clojure.string :refer [split]])
   (:require [clojure.test :refer [deftest is]]))
@@ -25,6 +25,9 @@
   (contains? (-> node :attrs keys set) :data-conclujon:assert-equals))
 
 (defn create-batches [resource] 
+  "Creates batches of assoc-input and assert-equals nodes so that
+   assert-equals functions will called with an input map built from
+   all assoc-inputs appearing prior to that assert-equal node."
   (loop [collector [] nodes (all-conclujon-nodes resource)]
     (let [split-before-assert-node (split-with assoc-input-node? nodes)
           input-nodes (first split-before-assert-node)
@@ -37,35 +40,48 @@
         (conj collector batch)))))
 
 (defn input-node-to-key-value [input-node]
+  "Creates an entry for the input map from an assoc-input node."
   (let [key (-> input-node :attrs :data-conclujon:assoc-input (subs 1) keyword)
         value (-> input-node :content first)]
     {key value}))
 
 (defn assert-node-to-function [assert-node]
+  "Resolves the assert-equals function inside the current namespace."
   (let [function-name (-> assert-node :attrs :data-conclujon:assert-equals symbol)]
     (resolve function-name)))
 
 (defn with-assert-function [assert-node]
+  "Transforms assert-equals node to map containing node and assert-function."
   {:assert-node assert-node :assert-function (assert-node-to-function assert-node)})
 
 (defn with-result [input-map {:keys [assert-node assert-function] :as assert-map}]
+  "Merges result of assertion into result map."
   (let [expected (-> assert-node :content first)
         actual (assert-function input-map)
         passed (= expected actual)]
     (merge assert-map {:actual actual :expected expected :passed passed})))
 
 (defn process-batch [{:keys [input-nodes assert-nodes]}]
+  "Processes a single batch of assoc-input and assert-equal nodes."
   (let [input-map (reduce into {} (map input-node-to-key-value input-nodes))
         with-assert-functions (map with-assert-function assert-nodes)
         with-results (map (partial with-result input-map) with-assert-functions)]
     with-results))
 
 (defn process-batches [batches]
+  "Processes all batches and merges the result into a single result map."
   (apply concat (map process-batch batches)))
 
 (defn apply-test-result [node result]
-  (let [class (if (:passed result) "passed" "failed")]
-    ((add-class class) node)))
+  "Applies the test result to a assert-equals node."
+  (let [passed? (:passed result)
+        class (if passed? "passed" "failed")
+        add-result-class (add-class class)
+        actual (:actual result)
+        add-actual (after (html-snippet "<span class='actual'>(actual: " actual ")</span>"))]
+    (if passed?
+      (add-result-class node)
+      (-> node add-result-class add-actual))))
 
 (defn create-result-transformation [results]
   (fn [node]
