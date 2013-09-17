@@ -4,7 +4,7 @@ Conclujon is meant to help you with writing [living documentation](http://specif
 
 ## Why HTML?
 
-If you are familiar with [Specification by Example](http://specificationbyexample.com/), you might remember the part about automating validation without changing specification. While there is no lack of great libraries for automating BDD style examples, I found translating requirements into [Concordion's](http://concordion.org) HTML-based test format a lot more flexible. As living documentation system, it simply offers a lot more flexibility than the alternatives.
+If you are familiar with [Specification by Example](http://specificationbyexample.com/), you might remember the part about automating validation without changing specification. While there is no lack of great libraries for automating BDD style examples, I found translating requirements into [Concordion's](http://concordion.org) HTML-based test format a lot more flexible.
 
 ## Why not Concordion?
 
