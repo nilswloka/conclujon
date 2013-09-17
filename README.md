@@ -76,7 +76,7 @@ As the `conclujon-spec` macro generates a `clojure.test`-compatible test case, y
       greeted with <em class="failed" data-conclujon:assert-equals="greeting">Hello Niels!</em><span class="actual">(actual: Hello Nils!)</span>.
     </p>
   </body>
-</hmtl>
+</html>
 ```
 
 ## How does Conclujon execute the specification?
